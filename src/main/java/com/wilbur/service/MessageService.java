@@ -18,6 +18,27 @@ public class MessageService
         return Collections.synchronizedList(new ArrayList<Message>(messages.values()));
     }
 
+    public List<Message> getAllMessagesByYear(int year){
+        List<Message> messagesForYear = Collections.synchronizedList(new ArrayList<>());
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 1; i < messages.size()+1; i++)
+        {
+            calendar.setTime(messages.get(Long.valueOf(i)).getCreated());
+            if (calendar.get(Calendar.YEAR) == year){
+                messagesForYear.add(messages.get(Long.valueOf(i)));
+            }
+        }
+        return messagesForYear;
+    }
+
+    public List<Message> getMessagePagination(int start, int size){
+        List<Message> listMessages = Collections.synchronizedList(new ArrayList<>(messages.values()));
+        if (start+size > listMessages.size()){
+            return Collections.synchronizedList(new ArrayList<>());
+        }
+        return listMessages.subList(start, start+size);
+    }
+
     public Message getMessage(long id){
         return messages.get(id);
     }

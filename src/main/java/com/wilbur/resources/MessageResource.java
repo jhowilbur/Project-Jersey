@@ -5,7 +5,6 @@ import com.wilbur.service.MessageService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
 import java.util.List;
 
 @Path("messages")
@@ -15,14 +14,23 @@ public class MessageResource
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Message> getMessages(){
+    public List<Message> getAllMessages(@QueryParam("year") int year,
+                                        @QueryParam("start") int start,
+                                        @QueryParam("size") int size)
+    {
+        if (year > 0){
+            return messageService.getAllMessagesByYear(year);
+        }
+        if (start >= 0 && size > 0){
+            return messageService.getMessagePagination(start, size);
+        }
         return messageService.getAllMessages();
     }
 
     @GET
     @Path("/{messageId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Message test(@PathParam("messageId") long id){
+    public Message getMessageById(@PathParam("messageId") long id){
         return messageService.getMessage(id);
     }
 
@@ -36,7 +44,7 @@ public class MessageResource
     @DELETE
     @Path("/{messageId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Message removeMessage(@PathParam("messageId") long id){
+    public Message removeMessageById(@PathParam("messageId") long id){
         return messageService.removeMessage(id);
     }
 
