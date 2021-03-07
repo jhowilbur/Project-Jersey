@@ -1,6 +1,7 @@
-package com.wilbur.resources;
+package com.wilbur.resource;
 
 import com.wilbur.model.Message;
+import com.wilbur.resource.bean.MessageFilterBean;
 import com.wilbur.service.MessageService;
 
 import javax.ws.rs.*;
@@ -14,15 +15,13 @@ public class MessageResource
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Message> getAllMessages(@QueryParam("year") int year,
-                                        @QueryParam("start") int start,
-                                        @QueryParam("size") int size)
+    public List<Message> getAllMessages(@BeanParam MessageFilterBean filterBean)
     {
-        if (year > 0){
-            return messageService.getAllMessagesByYear(year);
+        if (filterBean.getYear() > 0){
+            return messageService.getAllMessagesByYear(filterBean.getYear());
         }
-        if (start >= 0 && size > 0){
-            return messageService.getMessagePagination(start, size);
+        if (filterBean.getStart() >= 0 && filterBean.getSize() > 0){
+            return messageService.getMessagePagination(filterBean.getStart(), filterBean.getSize());
         }
         return messageService.getAllMessages();
     }
