@@ -15,7 +15,7 @@ public class MessageService
     }
 
     public List<Message> getAllMessages(){
-        return Collections.synchronizedList(new ArrayList<Message>(messages.values()));
+        return Collections.synchronizedList(new ArrayList<>(messages.values()));
     }
 
     public List<Message> getAllMessagesByYear(int year){

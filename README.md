@@ -19,6 +19,11 @@ The following components are part of Jersey:
 ![image](https://user-images.githubusercontent.com/59379254/110229642-c6a34280-7ee9-11eb-9776-2f71ea15bea0.png)
 ![image](https://user-images.githubusercontent.com/59379254/110229629-a7a4b080-7ee9-11eb-82d5-0368f9fa20ea.png)
 
+-----------------
+
+# For running this project
+
+
 Thanks for your attention!
 
 ~ 🅦🅘🅛🅑🅤🅡 ~
